@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Digital Person</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    font: 17px/1.4 -apple-system, system-ui, sans-serif; text-align: center;
+    background: Canvas; color: CanvasText;
+  }
+  main { padding: 24px; max-width: 320px; }
+  a {
+    display: inline-block; margin-top: 16px; padding: 12px 20px; border-radius: 12px;
+    background: #007aff; color: #fff; text-decoration: none; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<main>
+  <p id="status">Возвращаемся в приложение…</p>
+  <a id="open" href="digitalperson://enablebanking/callback">Открыть Digital Person</a>
+</main>
+<script>
+  // Enable Banking redirects here with ?code=...&state=... after the bank approves access.
+  // This page keeps nothing: it only hands the same parameters over to the app.
+  var target = 'digitalperson://enablebanking/callback' + window.location.search;
+  document.getElementById('open').href = target;
+  if (window.location.search) {
+    window.location.replace(target);
+  } else {
+    document.getElementById('status').textContent =
+      'Эта страница нужна только для возврата из банка в приложение Digital Person.';
+  }
+</script>
+</body>
+</html>
